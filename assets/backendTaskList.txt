@@ -1,0 +1,74 @@
+Create backend
+    1. Setup apollo-express-server
+    2. Setup mongoose models
+        1. User.js
+        2. Issue.js
+        3. Comment.js
+    3. Setup GraphQL typeDefs
+        1. Setup GraphQL types
+        2. Setup GraphQL queries
+        3. Setup GraphQL mutations
+    4. Setup GraphQL resolvers
+        - NOTE: Test each query and mutation after creation using apollo tools
+        1. Setup queries using mongoose methods
+            1. Get single user by user_id
+            2. Get all users
+            3. Get all issues
+            4. Get all issues by user_id
+            5. Get all comments by user_id
+            6. Get all comments by issue_id
+        2. Setup mutations using mongoose methods
+            1. Authentication
+                1. Register user
+                2. Login user
+                3. Setup JWT
+            2. Create new issue
+            3. Edit existing issue
+            3. Upvote issue
+            4. Delete existing issue
+            5. Create new comment
+            6. Edit existing comment
+            7. Delete existing comment
+                - When deleted by creator display [deleted] instead of previous content
+                - When deleted by admin display [removed]
+    5. Add jwt authentication to create, edit, and delete API's so that only users that created the item can alter them
+        - If more time, add auth that admins should be able to make any changes
+    6. Create test for one GraphQL query and mutations
+
+In Progress:
+5. Add jwt authentication to create, edit, and delete API's so that only users that created the item can alter them
+    - If more time, add auth that admins should be able to make any changes
+6. Create test for one GraphQL query and mutations
+    
+Completed:
+1. Setup apollo-express-server
+2. Setup mongoose models
+    1. User.js
+    2. Issue.js
+    3. Comment.js
+3. Setup GraphQL typeDefs
+    1. Setup GraphQL types
+    2. Setup GraphQL queries
+    3. Setup GraphQL mutations
+4. Setup GraphQL resolvers
+    1. Setup queries using mongoose methods
+        1. Get single user by user_id
+        2. Get all users
+        3. Get all issues
+        4. Get all issues by user_id
+        5. Get all comments by user_id
+        6. Get all comments by issue_id
+    2. Setup mutations using mongoose methods
+        1. Authentication
+            1. Register user
+            2. Login user
+            3. Setup JWT (tokenCheck is still an HTTP route)
+        2. Create new issue
+        3. Edit existing issue
+        4. Delete existing issue
+        5. Create new comment
+        6. Edit existing comment
+        7. Delete existing comment
+
+    Unnumbered
+    - Change schema of issue to have lists of user_id's for users that upvote (usersUpvoted) and downvote (usersDownvoted)

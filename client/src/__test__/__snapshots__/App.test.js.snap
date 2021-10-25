@@ -1,0 +1,229 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component rendering renders without crashing given the required props 1`] = `
+<div
+  className="App"
+>
+  <BrowserRouter>
+    <ContextProvider
+      value={
+        Object {
+          "setUserData": [Function],
+          "userData": Object {
+            "token": undefined,
+            "user": undefined,
+          },
+        }
+      }
+    >
+      <NavBar />
+      <div
+        className="content"
+      >
+        <Switch>
+          <Route
+            component={[Function]}
+            exact={true}
+            path="/"
+          />
+          <Route
+            component={[Function]}
+            path="/landingPage"
+          />
+          <Route
+            component={[Function]}
+            path="/register"
+          />
+          <Route
+            component={[Function]}
+            path="/login"
+          />
+          <Route
+            component={[Function]}
+            path="/issues/:_id"
+          />
+          <Route
+            component={[Function]}
+            path="/createIssue"
+          />
+          <Route
+            component={[Function]}
+            path="/profile"
+          />
+        </Switch>
+      </div>
+    </ContextProvider>
+  </BrowserRouter>
+</div>
+`;
+
+exports[`App renders without crashing given the required props 1`] = `
+<div
+  className="App"
+>
+  <BrowserRouter>
+    <ContextProvider
+      value={
+        Object {
+          "setUserData": [Function],
+          "userData": Object {
+            "token": undefined,
+            "user": undefined,
+          },
+        }
+      }
+    >
+      <NavBar />
+      <div
+        className="content"
+      >
+        <Switch>
+          <Route
+            component={[Function]}
+            exact={true}
+            path="/"
+          />
+          <Route
+            component={[Function]}
+            path="/landingPage"
+          />
+          <Route
+            component={[Function]}
+            path="/register"
+          />
+          <Route
+            component={[Function]}
+            path="/login"
+          />
+          <Route
+            component={[Function]}
+            path="/issues/:_id"
+          />
+          <Route
+            component={[Function]}
+            path="/createIssue"
+          />
+          <Route
+            component={[Function]}
+            path="/profile"
+          />
+        </Switch>
+      </div>
+    </ContextProvider>
+  </BrowserRouter>
+</div>
+`;
+
+exports[`Test App component rendering renders without crashing given the required props 1`] = `
+<div
+  className="App"
+>
+  <BrowserRouter>
+    <ContextProvider
+      value={
+        Object {
+          "setUserData": [Function],
+          "userData": Object {
+            "token": undefined,
+            "user": undefined,
+          },
+        }
+      }
+    >
+      <NavBar />
+      <div
+        className="content"
+      >
+        <Switch>
+          <Route
+            component={[Function]}
+            exact={true}
+            path="/"
+          />
+          <Route
+            component={[Function]}
+            path="/landingPage"
+          />
+          <Route
+            component={[Function]}
+            path="/register"
+          />
+          <Route
+            component={[Function]}
+            path="/login"
+          />
+          <Route
+            component={[Function]}
+            path="/issues/:_id"
+          />
+          <Route
+            component={[Function]}
+            path="/createIssue"
+          />
+          <Route
+            component={[Function]}
+            path="/profile"
+          />
+        </Switch>
+      </div>
+    </ContextProvider>
+  </BrowserRouter>
+</div>
+`;
+
+exports[`sets the userData prop as the \`value\` prop on the ContextProvider renders without crashing given the required props 1`] = `
+<div
+  className="App"
+>
+  <BrowserRouter>
+    <ContextProvider
+      value={
+        Object {
+          "setUserData": [Function],
+          "userData": Object {
+            "token": undefined,
+            "user": undefined,
+          },
+        }
+      }
+    >
+      <NavBar />
+      <div
+        className="content"
+      >
+        <Switch>
+          <Route
+            component={[Function]}
+            exact={true}
+            path="/"
+          />
+          <Route
+            component={[Function]}
+            path="/landingPage"
+          />
+          <Route
+            component={[Function]}
+            path="/register"
+          />
+          <Route
+            component={[Function]}
+            path="/login"
+          />
+          <Route
+            component={[Function]}
+            path="/issues/:_id"
+          />
+          <Route
+            component={[Function]}
+            path="/createIssue"
+          />
+          <Route
+            component={[Function]}
+            path="/profile"
+          />
+        </Switch>
+      </div>
+    </ContextProvider>
+  </BrowserRouter>
+</div>
+`;

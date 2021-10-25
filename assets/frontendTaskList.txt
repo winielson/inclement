@@ -1,0 +1,51 @@
+2. Create and Style NavBar
+3. Create and Style LandingPage
+4. Create and Style Issue Container
+5. Create and Style IssueCard
+6. Create and Style IssuePage
+7. Create Issue Editing functionality on Issue Page
+8. Create IssueCreate page functionality
+9. Create and Style CommentCard
+10. Create and Style CreateComment
+11. Create and Style CreateIssue
+12. Test a component with jest and enzyme
+13. Cleanup code
+
+EXTRA:
+1. Refactor authentication REST requests in client to newly created GraphQL queries and mutations
+
+- Read more about jwt
+- Make protected/private routes
+
+- Bug: issue.timeCreated is an Int in IssuePage and cannot be converted to a date
+
+In Progress:
+- Bug: When IssuePage is edited and then user goes back to dashboard, the IssueCard is not updated
+    - same after IssueCreate
+    - Fix by adding context that holds IssueContainer state (issueContainerReload)  
+        - set to true when issue or comment is created and edited
+        - set to false in IssueContainer.js after requerying the api
+
+Completed:
+2. Create and Style NavBar
+3. Create and Style LandingPage
+4. Create and Style Issue Container
+5. Create and Style Issue
+6. Create and Style IssuePage
+7. Create Issue Editing functionality on Issue Page
+8. Create IssueCreate page functionality
+    - Create route to page from IssueContainer
+9. Create and Style CommentCard
+10. Create and Style CreateComment
+11. Create and Style CreateIssue
+12. Test with jest and enzyme
+13. Cleanup code
+14. Create better data for demo
+
+- Find out why logged in user is redirected to login on refresh
+- Style login
+- Style register
+- Find way to pass author to issue page
+- Add delete button in IssuePage editMode
+- Handle voting system
+- Profile: Include a page that will allow logged-in users to view all issues they personally made

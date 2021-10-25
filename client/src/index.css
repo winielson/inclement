@@ -1,0 +1,392 @@
+/* body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} */
+
+/* base styles */
+* {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  color: #333;
+}
+
+.navBar {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.navBar h1 {
+  color: #f1356d;
+}
+
+.navBarAuth {
+  margin-left: auto;
+}
+
+.navBar a {
+  margin-left: 16px;
+  text-decoration: none; /* Remove underline from links*/
+  padding: 6px;
+}
+
+.navBar a:hover { /*Change link color on mouse hover*/
+  color: #f1356d;
+}
+
+.content {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.landingPage {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.landingPage p {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.landingPage a {
+  text-decoration: none; /* Remove underline from links*/
+  padding: 6px;
+  color: rgb(23, 219, 154);
+  font-size: 150%;
+}
+
+.landingPage a:hover { /*Change link color on mouse hover*/
+  color: #f1356d;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+}
+
+.login h1 {
+  margin-bottom: 20px;
+}
+
+.login form {
+  margin: 0 auto;
+}
+
+.login div {
+  margin-bottom: 5px;
+}
+
+.login #password {
+  margin-left: 5px;
+}
+
+.login .buttonRow {
+  margin-top: 15px;
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+}
+
+.register h1 {
+  margin-bottom: 20px;
+}
+
+.register form {
+  margin: 0 auto;
+}
+
+.register div {
+  margin-bottom: 5px;
+}
+
+.register #email {
+  margin-left: 32px;
+}
+
+.register #password {
+  margin-left: 5px;
+}
+
+.register #passwordCheck {
+  margin-left: 5px;
+}
+
+.register input[type=submit] {
+  margin-top: 15px;
+}
+
+/* ISSUE Styling */
+.issueContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.createIssueDiv {
+  text-align: end;
+  padding-bottom: 20px;
+  font-weight: bold;
+  font-size: 110%;
+}
+
+.createIssueDiv span{
+  color: #3A86FF;
+}
+
+.createIssueDiv span:hover{
+  color: rgb(116, 116, 255);
+  cursor: pointer;
+}
+
+.issueCard {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #f2f2f2;
+  margin: 0px 10px 10px 10px;
+  padding: 20px;
+}
+
+.issueCard .issueVotes {
+  /* background-color: #f1356d; */
+  max-width: 100px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 20px;
+}
+
+.issueContent {
+  /* background-color: light#3A86FF; */
+  padding-top: 12px;
+  padding-left: 25px;
+  flex-basis: 80%;
+}
+
+.issueCard .issueAuthor {
+  color: #333;
+  font-size: 90%;
+  text-align: right;
+  font-style: italic;
+}
+
+.issueCreate {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .issueCreate .issueCreateForm {
+  display: flex;
+  flex-direction: column;
+} */
+
+.issueCreate .issueCreateForm {
+  margin: auto;
+}
+
+.issueCreate .issueCreateForm .issueCreateInputs{
+  margin-top: 20px;
+}
+
+.issueCreate .issueCreateForm .issueCreateInputs input{
+  margin-top: 10px;
+}
+
+.issueCreate .issueCreateForm button{
+  margin-top: 20px;
+  margin-right: 5px;
+}
+
+.issuePage .issues{
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #f2f2f2;
+  margin: 0px 10px 10px 10px;
+  padding: 20px;
+}
+
+.issueVotes {
+  /* background-color: #f1356d; */
+  max-width: 100px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  /* background-color: aqua; */
+}
+
+.issueVotes span{
+  margin-bottom: 2px;
+}
+
+.issueVotes button{
+  border: 1px solid #f2f2f2;
+  width: 30px;
+  height: 30px;
+}
+
+.issueVotes button:hover{
+  cursor: pointer;
+}
+
+.issueVotes .downvoteButton{
+  font-size: 100%;
+}
+
+.issuePage .issueAuthor {
+  color: #333;
+  font-size: 90%;
+  text-align: start;
+}
+
+.issuePage .issueAuthor .issueAuthorEdit{
+  text-align: right;
+}
+
+.issuePage .issueAuthor {
+  margin-top: 5px;
+  font-style: italic;
+}
+
+.issuePage .issueAuthor .issueAuthorEdit span{
+  color: #3A86FF;
+  font-size: 15px;
+  font-style: normal;
+}
+
+.issueAuthorEdit span:hover {
+  cursor: pointer;
+}
+
+.issuePage .comments{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #f2f2f2;
+  margin: 0px 10px 10px 10px;
+  padding: 20px;
+}
+
+.issuePage .comments h3{
+  padding-bottom: 10px;
+}
+
+.issuePage .comment{
+  display: flex;
+  flex-direction: column;
+  min-height: 70px;
+  border: 1px solid #bdbaba;
+  border-radius: 5px;
+  margin: 5px 10px 0px 5px;
+  padding: 20px;
+}
+
+.issuePageForm {
+  /* display: flex;
+  flex-direction: row; */
+  flex-basis: 100%;
+  /* background-color: #f1356d; */
+}
+
+.issuePageForm .issueFormInput {
+  display: flex;
+  flex-direction: column;
+}
+
+.issuePageForm .issueFormInput input[type=text]{
+  font-size: 150%;
+  font-weight: bold;
+}
+
+.issuePageForm .issueFormBtns {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 100%;
+  margin-top: 20px;
+  /* background-color: #f1356d; */
+}
+
+.issuePageForm .issueFormBtns .issueFormUpdateBtns button{
+  margin-right: 5px;
+}
+
+.issuePageForm .issueFormBtns .issueFormDeleteBtn {
+  /* background-color: aquamarine; */
+  margin-left: auto;
+}
+
+.comment .commentDescription {
+
+}
+
+.comment .commentDescriptionEdit{
+  text-align: right;
+}
+
+.comment .commentDescriptionEdit span{
+  color: #3A86FF;
+  font-size: 15px;
+}
+
+.commentDescriptionEdit span:hover{
+  cursor: pointer;
+}
+
+.comments .addCommentDiv{
+  margin: auto;
+}
+
+.comments .addCommentDiv input[type=text]{
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  min-width: 300px;
+}
+
+.voteCount {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.profileContainer h1{
+  padding-bottom: 20px;
+}
+
+/* tablet styles */
+@media screen and (max-width: 1000px) {
+  .App {
+    flex-direction: column;
+  }
+}
+
+/* phone styles */
+/* @media screen and (max-width: 700px) {
+  main {
+    flex-direction: column;
+  }
+} */
