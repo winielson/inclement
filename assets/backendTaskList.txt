@@ -39,6 +39,7 @@ In Progress:
 5. Add jwt authentication to create, edit, and delete API's so that only users that created the item can alter them
     - If more time, add auth that admins should be able to make any changes
 6. Create test for one GraphQL query and mutations
+7. Delete comments when issue is deleted
     
 Completed:
 1. Setup apollo-express-server

@@ -11,16 +11,20 @@ import Register from './components/auth/Register';
 import Dashboard from './components/pages/Dashboard';
 import Login from './components/auth/Login';
 import UserContext from './context/userContext';
+import IssueContext from './context/issueContext';
 import LandingPage from './components/pages/LandingPage';
 import IssuePage from './components/issues/IssuePage';
 import IssueCreate from './components/issues/IssueCreate';
 import Profile from './components/profile/Profile';
+
 
 function App() {
   const [userData, setUserData] = useState({
     token: undefined,
     user: undefined
   });
+  const [ shouldUpdate, setShouldUpdate] = useState(false);
+  
 
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -62,18 +66,20 @@ function App() {
     <div className='App'>
       <BrowserRouter>
         <UserContext.Provider value={{ userData, setUserData }}>
-          <NavBar />
-          <div className='content'>
-            <Switch>
-              <Route exact path='/' component={Dashboard} />
-              <Route path='/landingPage' component={LandingPage} />
-              <Route path='/register' component={Register} />
-              <Route path='/login' component={Login} />
-              <Route path="/issues/:_id" component={IssuePage} />
-              <Route path="/createIssue" component={IssueCreate} />
-              <Route path="/profile" component={Profile} />
-            </Switch>
-          </div>          
+          <IssueContext.Provider value={{ shouldUpdate, setShouldUpdate }}>    
+            <NavBar />
+            <div className='content'>
+              <Switch>
+                <Route exact path='/' component={Dashboard} />
+                <Route path='/landingPage' component={LandingPage} />
+                <Route path='/register' component={Register} />
+                <Route path='/login' component={Login} />
+                <Route path="/issues/:_id" component={IssuePage} />
+                <Route path="/createIssue" component={IssueCreate} />
+                <Route path="/profile" component={Profile} />
+              </Switch>
+            </div>  
+          </IssueContext.Provider>        
         </UserContext.Provider>
       </BrowserRouter>    
     </div>    

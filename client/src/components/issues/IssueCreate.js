@@ -4,16 +4,19 @@
 
 import React, { useState, useContext } from 'react'
 import UserContext from '../../context/userContext'
+import IssueContext from '../../context/issueContext';
 import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 import { CREATE_ISSUE_MUTATION } from '../graphql/mutations/CreateIssueMutation';
 
 export default function IssueCreate() {
     const { userData } = useContext(UserContext);
+    const { shouldUpdate, setShouldUpdate } = useContext(IssueContext);
     const [issueData, setIssueData] = useState({data: {
         title: "",
         description: ""
     }}); 
+
     const history = useHistory();
 
     // Init useMutation hook that creates a new Issue
@@ -52,6 +55,10 @@ export default function IssueCreate() {
 
         // alert the user that the new Issue has been created
         alert('New Issue has successfully been created!')
+
+        // set update issue flag to true
+        setShouldUpdate(true);
+        console.log({msg: 'issuecreate', shouldUpdate});
 
         // route them back to dashboard
         history.push('/');
