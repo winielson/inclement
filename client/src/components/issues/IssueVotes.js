@@ -19,23 +19,36 @@ export default function IssueVotes({ issue }) {
         upvoteColor: 'pink',
         downvoteColor: 'cyan'
     });
+    const [isLoaded, setIsLoaded] = useState(false);
 
     // Initialize useMutation for updating an issue
     const [updateVotes] = useMutation(UPDATE_ISSUE_VOTES);
 
     useEffect(() => {
-        // Set issue vote data of current issue and color based on current user
-        setVoteData({
-            usersUpvoted: issue.usersUpvoted,
-            usersDownvoted: issue.usersDownvoted,
-            totalUpvotes: issue.usersUpvoted.length,
-            totalDownvotes: issue.usersDownvoted.length,
-            totalVotes: issue.usersUpvoted.length - issue.usersDownvoted.length,
-            upvoteColor: (issue.usersUpvoted.includes(userData.user.id) ? "#3A86FF" : "white"),
-            downvoteColor: (issue.usersDownvoted.includes(userData.user.id) ? "#FB5607" : "white")
-        });   
+        const checkIfContextLoaded = async () => {
+            await userData.user;
+        
+            // If user is logged in and token in memory is valid, set user data
+            if(userData.user) {
+                setIsLoaded(true);
+            }
+        }
 
-    }, [userData, issue]);
+        checkIfContextLoaded();
+
+        // Set issue vote data of current issue and color based on current user
+        if(isLoaded) {
+            setVoteData({
+                usersUpvoted: issue.usersUpvoted,
+                usersDownvoted: issue.usersDownvoted,
+                totalUpvotes: issue.usersUpvoted.length,
+                totalDownvotes: issue.usersDownvoted.length,
+                totalVotes: issue.usersUpvoted.length - issue.usersDownvoted.length,
+                upvoteColor: (issue.usersUpvoted.includes(userData.user.id) ? "#3A86FF" : "white"),
+                downvoteColor: (issue.usersDownvoted.includes(userData.user.id) ? "#FB5607" : "white")
+            });   
+        }
+    }, [isLoaded, userData, issue]);
 
     const handleUpvote = (e) => {
         e.preventDefault();

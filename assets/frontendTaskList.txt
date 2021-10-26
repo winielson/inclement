@@ -20,11 +20,7 @@ EXTRA:
 - Bug: issue.timeCreated is an Int in IssuePage and cannot be converted to a date
 
 In Progress:
-- Bug: When IssuePage is edited and then user goes back to dashboard, the IssueCard is not updated
-    - same after IssueCreate
-    - Fix by adding context that holds IssueContainer state (issueContainerReload)  
-        - set to true when issue or comment is created and edited
-        - set to false in IssueContainer.js after requerying the api
+
 
 Completed:
 2. Create and Style NavBar
@@ -49,3 +45,7 @@ Completed:
 - Add delete button in IssuePage editMode
 - Handle voting system
 - Profile: Include a page that will allow logged-in users to view all issues they personally made
+
+- Bug: When IssuePage is edited and then user goes back to dashboard, the IssueCard is not updated
+    - fixed by having context that holds flag on whether the data needs to be refetched. Used useQuery's
+    built in refetch function to refetch when this flag is true.

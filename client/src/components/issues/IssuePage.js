@@ -13,6 +13,7 @@ import QueryResult from '../misc/QueryResult';
 import CommentCard from '../comments/CommentCard';
 import UserContext from '../../context/userContext';
 import IssueVotes from './IssueVotes';
+import IssueContext from '../../context/issueContext';
 
 // Import graphql queries and mutations
 import { GET_ISSUE_COMMENTS } from '../graphql/queries/GetIssueComments';
@@ -32,11 +33,30 @@ const IssuePage = ({ match, location }) => {
         }
     });
     const [addCommentData, setAddCommentData] = useState({message: ''});
+    const [shouldRefetch, setShouldRefetch] = useState(false);
+    const { setShouldUpdate } = useContext(IssueContext);
 
     // Store arguments as variables
     const { params: { _id } } = match; // Get _id from url params NOTE: match is passed by history.push()
     const issue = location.state.issue;
     const issueAuthor = location.state.author;
+
+     /*
+        GraphQL Query and Mutation initializations
+    */
+    // Initialize useQuery hook to get all issue comments
+    const { loading, error, data, refetch } = useQuery(GET_ISSUE_COMMENTS, {
+        variables: { getCommentsByIssueIssue: _id },
+    });     
+
+    // Initialize useMutation for updating an issue
+    const [updateIssue, updateIssueArgs] = useMutation(UPDATE_ISSUE_MUTATION);
+
+    // Initialize useMutation for deleting an issue
+    const [deleteIssue, deleteIssueArgs] = useMutation(DELETE_ISSUE_MUTATION);
+
+    // Initialize useMutation for creating a comment
+    const [createComment, createCommentArgs] = useMutation(CREATE_COMMENT_MUTATION);
     
     useEffect(() => {
         const checkIfContextLoaded = async () => {
@@ -62,25 +82,19 @@ const IssuePage = ({ match, location }) => {
                 // setInEditMode(true);
             }           
         };     
-    }, [userData, isLoaded, issueAuthor, issue]);
-
-    /*
-        GraphQL Query and Mutation initializations
-    */
-    // Initialize useQuery hook
-    const { loading, error, data } = useQuery(GET_ISSUE_COMMENTS, {
-        variables: { getCommentsByIssueIssue: _id },
-    });     
+    }, [userData, isLoaded, issueAuthor, issue]);   
     
-    // Initialize useMutation for updating an issue
-    const [updateIssue, updateIssueArgs] = useMutation(UPDATE_ISSUE_MUTATION);
-
-    // Initialize useMutation for deleting an issue
-    const [deleteIssue, deleteIssueArgs] = useMutation(DELETE_ISSUE_MUTATION);
-
-    // Initialize useMutation for creating a comment
-    const [createComment, createCommentArgs] = useMutation(CREATE_COMMENT_MUTATION);
-
+    // Used to refetch comments when one is added or changed
+    // triggered when shouldRefetch state is true
+    useEffect(() => {
+        if(shouldRefetch) {
+            refetch(); // GET_ALL_COMMENTS refetch
+            console.log({shouldRefetch});
+            setShouldRefetch(false);
+            console.log({shouldRefetch});
+        }
+    }, [shouldRefetch, setShouldRefetch, refetch])  
+    
     /*
         Issue Edit Handling
     */
@@ -121,6 +135,9 @@ const IssuePage = ({ match, location }) => {
 
         // switch edit mode off and refresh data
         setInEditMode(false);
+
+        // let issueContainer know it needs to update via issueContext
+        setShouldUpdate(true);
 
         // display message notifying user that the issue is updated successfully
         alert('Issue was updated successfully!');
@@ -166,6 +183,9 @@ const IssuePage = ({ match, location }) => {
         // switch editing flags off
         setShowEdit(false);
         setInEditMode(false);
+        
+        // let issueContainer know it needs to update via issueContext
+        setShouldUpdate(true);
     }
 
     const handleEditCancel = () => {
@@ -194,10 +214,14 @@ const IssuePage = ({ match, location }) => {
 
         console.log(createCommentMutation);
 
-        setAddCommentData({ message: '' });  
-
         // display message notifying user that the issue is updated successfully
         alert('Comment was created successfully!');
+
+        // reset comment input field
+        setAddCommentData({ message: '' });  
+
+        // refetch the comments by querying again
+        setShouldRefetch(true);
     }
 
     const handleAddCommentChange = (e) => {

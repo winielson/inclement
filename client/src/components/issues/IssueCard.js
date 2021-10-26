@@ -10,12 +10,9 @@ import QueryResult from '../misc/QueryResult';
 import IssueVotes from './IssueVotes';
 import { GET_ISSUE_AUTHOR_NAME } from '../graphql/queries/GetIssueAuthorQuery';
 
-import IssueContext from '../../context/issueContext';
-
 const IssueCard = ({ issue }) => {
     const history = useHistory();
     const [author, setAuthor] = useState(undefined); 
-    const { shouldUpdate, setShouldUpdate } = useContext(IssueContext);
 
     const { loading, error, data } = useQuery(GET_ISSUE_AUTHOR_NAME, {
         variables: { getUserByIdId: issue.author },

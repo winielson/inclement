@@ -23,7 +23,7 @@ export default function IssueContainer() {
             setSortedData(data?.getAllIssues.slice(0).sort(compare));
             //setSortedData(sortedData.sort(compare));
         }
-    }, [data])
+    }, [data]);
 
     useEffect(() => {
         if(shouldUpdate) {
