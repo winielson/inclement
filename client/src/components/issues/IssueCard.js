@@ -9,6 +9,7 @@ import { useQuery } from '@apollo/client';
 import QueryResult from '../misc/QueryResult';
 import IssueVotes from './IssueVotes';
 import { GET_ISSUE_AUTHOR_NAME } from '../graphql/queries/GetIssueAuthorQuery';
+import IssueDate from './IssueDate';
 
 const IssueCard = ({ issue }) => {
     const history = useHistory();
@@ -35,6 +36,7 @@ const IssueCard = ({ issue }) => {
                     <QueryResult error={error} loading={loading} data={data}>
                         {data?.getUserById?.username}                        
                     </QueryResult>
+                    <IssueDate timeCreated={issue.timeCreated}/>
                 </div>
             </div>
         </div>        

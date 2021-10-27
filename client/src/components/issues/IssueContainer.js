@@ -57,6 +57,8 @@ export default function IssueContainer() {
                 {sortedData.map((issue, index) => (
                     <IssueCard issue={issue} key={issue._id}/>
                 ))}
+
+                {console.log({data})}
             </QueryResult>            
         </div>
     )

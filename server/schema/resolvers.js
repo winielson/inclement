@@ -120,7 +120,7 @@ const resolvers = {
         },
         async getAllIssues() {
             try {
-                const issues = await Issue.find();
+                let issues = await Issue.find();
                 console.log('getAllIssues success');
                 return issues;
             }            
