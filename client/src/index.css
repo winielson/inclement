@@ -191,6 +191,7 @@ h1 {
   font-size: 90%;
   text-align: right;
   font-style: italic;
+  margin-top: 20px;
 }
 
 .issueCreate {

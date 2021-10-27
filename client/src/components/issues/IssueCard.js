@@ -31,12 +31,11 @@ const IssueCard = ({ issue }) => {
             <IssueVotes issue={issue} />
             <div className='issueContent' onClick={handleIssueContentClick}>
                 <h2>{issue.title}</h2>
-                <p>{issue.description}</p>
                 <div className='issueAuthor'>Posted by{' '} 
                     <QueryResult error={error} loading={loading} data={data}>
-                        {data?.getUserById?.username}                        
+                        {data?.getUserById?.username}<IssueDate timeCreated={issue.timeCreated}/>                  
                     </QueryResult>
-                    <IssueDate timeCreated={issue.timeCreated}/>
+                    
                 </div>
             </div>
         </div>        
