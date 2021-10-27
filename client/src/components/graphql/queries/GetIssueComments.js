@@ -7,6 +7,7 @@ export const GET_ISSUE_COMMENTS = gql`
             message
             issue
             author
+            timeCreated
             _id
         }
     }

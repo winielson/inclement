@@ -33,7 +33,7 @@ const IssueCard = ({ issue }) => {
                 <h2>{issue.title}</h2>
                 <div className='issueAuthor'>Posted by{' '} 
                     <QueryResult error={error} loading={loading} data={data}>
-                        {data?.getUserById?.username}<IssueDate timeCreated={issue.timeCreated}/>                  
+                        {data?.getUserById?.username} on <IssueDate timeCreated={issue.timeCreated}/>                  
                     </QueryResult>
                     
                 </div>

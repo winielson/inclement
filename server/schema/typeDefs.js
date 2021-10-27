@@ -46,6 +46,7 @@ const typeDefs = gql`
         message: String!
         issue: String!
         author: String!
+        timeCreated: String
         _id: String!
     }
 

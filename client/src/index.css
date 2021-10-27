@@ -336,8 +336,11 @@ h1 {
   margin-left: auto;
 }
 
-.comment .commentDescription {
-
+.comment .commentDate {
+  font-size: 90%;
+  text-align: right;
+  font-style: italic;
+  margin-top: 20px;
 }
 
 .comment .commentDescriptionEdit{
