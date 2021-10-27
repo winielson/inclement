@@ -44,8 +44,8 @@ export default function IssueVotes({ issue }) {
                 totalUpvotes: issue.usersUpvoted.length,
                 totalDownvotes: issue.usersDownvoted.length,
                 totalVotes: issue.usersUpvoted.length - issue.usersDownvoted.length,
-                upvoteColor: (issue.usersUpvoted.includes(userData.user.id) ? "#3A86FF" : "white"),
-                downvoteColor: (issue.usersDownvoted.includes(userData.user.id) ? "#FB5607" : "white")
+                upvoteColor: (issue.usersUpvoted.includes(userData.user.id) ? "#FF8b60" : "white"),
+                downvoteColor: (issue.usersDownvoted.includes(userData.user.id) ? "#9494FF" : "white")
             });   
         }
     }, [isLoaded, userData, issue]);
@@ -98,8 +98,8 @@ export default function IssueVotes({ issue }) {
             totalUpvotes: upvoteArr.length,
             totalDownvotes: downvoteArr.length,
             totalVotes: upvoteArr.length - downvoteArr.length,
-            upvoteColor: (upvoteArr.includes(userData.user.id) ? "#3A86FF" : "white"),
-            downvoteColor: (downvoteArr.includes(userData.user.id) ? "#FB5607" : "white")
+            upvoteColor: (upvoteArr.includes(userData.user.id) ? "#FF8b60" : "white"),
+            downvoteColor: (downvoteArr.includes(userData.user.id) ? "#9494FF" : "white")
         });
 
         // Update issue data by calling editIssue mutation
@@ -161,8 +161,8 @@ export default function IssueVotes({ issue }) {
             totalUpvotes: upvoteArr.length,
             totalDownvotes: downvoteArr.length,
             totalVotes: upvoteArr.length - downvoteArr.length,
-            upvoteColor: (upvoteArr.includes(userData.user.id) ? "#3A86FF" : "white"),
-            downvoteColor: (downvoteArr.includes(userData.user.id) ? "#FB5607" : "white")
+            upvoteColor: (upvoteArr.includes(userData.user.id) ? "#FF8b60" : "white"),
+            downvoteColor: (downvoteArr.includes(userData.user.id) ? "#9494FF" : "white")
         });
 
         // Update issue data by calling editIssue mutation

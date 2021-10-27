@@ -35,7 +35,7 @@ const IssuePage = ({ match, location }) => {
     });
     const [addCommentData, setAddCommentData] = useState({message: ''});
     const [shouldRefetch, setShouldRefetch] = useState(false);
-    const [commentsRefetched, setCommentsRefetched] = useState(false);
+    const [isRefetched, setIsRefetched] = useState(false);
     const { setShouldUpdate } = useContext(IssueContext);
 
     // Store arguments as variables
@@ -92,16 +92,16 @@ const IssuePage = ({ match, location }) => {
         const reloadComments = async () => {
             await refetch();
 
-            setCommentsRefetched(true);
+            setIsRefetched(true);
         }
 
         reloadComments();
 
-        if(shouldRefetch && commentsRefetched) {            
+        if(shouldRefetch && isRefetched) {            
             setShouldRefetch(false);
-            setCommentsRefetched(false);
+            setIsRefetched(false);
         }
-    }, [shouldRefetch, commentsRefetched, setShouldRefetch, refetch])  
+    }, [shouldRefetch, isRefetched, setShouldRefetch, refetch])  
     
     /*
         Issue Edit Handling

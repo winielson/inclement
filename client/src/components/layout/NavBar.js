@@ -12,7 +12,7 @@ export default class NavBar extends Component {
         return (
             <div className="navBar">
                     <div className='navBarTitle'>
-                        <Link to='/'><h1 className='title'>Inclement</h1></Link>
+                        <Link to='/'><h1 className='title'>inclement</h1></Link>
                     </div>
                     <div className='navBarAuth'>
                         <AuthOptions />

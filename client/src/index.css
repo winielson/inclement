@@ -32,7 +32,7 @@ code {
 }
 
 .navBar h1 {
-  color: #f1356d;
+  color: #ff2a04;
 }
 
 .navBarAuth {
@@ -169,6 +169,11 @@ h1 {
   border: 1px solid #f2f2f2;
   margin: 0px 10px 10px 10px;
   padding: 20px;
+}
+
+.issueCard:hover {
+  border: 1px solid #ff2a04;
+  cursor: pointer;
 }
 
 .issueCard .issueVotes {
