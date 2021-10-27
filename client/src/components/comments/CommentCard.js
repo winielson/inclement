@@ -8,6 +8,7 @@ import { useQuery } from '@apollo/client';
 import UserContext from '../../context/userContext';
 import QueryResult from '../misc/QueryResult';
 import { GET_COMMENT_AUTHOR_NAME } from '../graphql/queries/GetCommentAuthorName';
+import IssueDate from '../issues/IssueDate';
 
 const CommentCard = ({ comment }) => {
     const { userData } = useContext(UserContext);
@@ -64,7 +65,7 @@ const CommentCard = ({ comment }) => {
         <div className='comment'>
             <div><b>
                 <QueryResult error={error} loading={loading} data={data}>
-                     {data?.getUserById?.username}
+                     {data?.getUserById?.username}{console.log(comment)}<IssueDate timeCreated={comment.timeCreated}/>
                 </QueryResult>  
             :</b></div>
             <p>{comment.message}</p>            

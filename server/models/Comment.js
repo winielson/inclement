@@ -20,6 +20,10 @@ const CommentSchema = mongoose.Schema({
         ref: 'User', 
         required: true
     },
+    timeCreated: {
+        type: Date,
+        default: Date.now
+    },
     comment_id: Schema.Types.ObjectId
 });
 

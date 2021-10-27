@@ -6,9 +6,9 @@ const IssueDate = ({ timeCreated }) => {
     let humanFormat = date.toLocaleString();
 
     return (
-        <div>
+        <>
             {' '+humanFormat}
-        </div>
+        </>
     )
 }
 
