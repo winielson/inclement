@@ -35,6 +35,7 @@ const IssuePage = ({ match, location }) => {
     });
     const [addCommentData, setAddCommentData] = useState({message: ''});
     const [shouldRefetch, setShouldRefetch] = useState(false);
+    const [commentsRefetched, setCommentsRefetched] = useState(false);
     const { setShouldUpdate } = useContext(IssueContext);
 
     // Store arguments as variables
@@ -88,13 +89,19 @@ const IssuePage = ({ match, location }) => {
     // Used to refetch comments when one is added or changed
     // triggered when shouldRefetch state is true
     useEffect(() => {
-        if(shouldRefetch) {
-            refetch(); // GET_ALL_COMMENTS refetch
-            console.log({shouldRefetch});
-            setShouldRefetch(false);
-            console.log({shouldRefetch});
+        const reloadComments = async () => {
+            await refetch();
+
+            setCommentsRefetched(true);
         }
-    }, [shouldRefetch, setShouldRefetch, refetch])  
+
+        reloadComments();
+
+        if(shouldRefetch && commentsRefetched) {            
+            setShouldRefetch(false);
+            setCommentsRefetched(false);
+        }
+    }, [shouldRefetch, commentsRefetched, setShouldRefetch, refetch])  
     
     /*
         Issue Edit Handling
@@ -215,13 +222,10 @@ const IssuePage = ({ match, location }) => {
 
         console.log(createCommentMutation);
 
-        // display message notifying user that the issue is updated successfully
-        alert('Comment was created successfully!');
-
         // reset comment input field
         setAddCommentData({ message: '' });  
 
-        // refetch the comments by querying again
+        // trigger useEffect to refetch the comments by querying again
         setShouldRefetch(true);
     }
 

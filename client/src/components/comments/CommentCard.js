@@ -57,6 +57,7 @@ const CommentCard = ({ comment }) => {
                         <span onClick={handleEditComment}>Edit</span>
                     </div>                    
                 </div>
+                <div className='commentDate'><IssueDate timeCreated={comment.timeCreated}/></div>      
             </div>
         )
     }
@@ -65,10 +66,11 @@ const CommentCard = ({ comment }) => {
         <div className='comment'>
             <div><b>
                 <QueryResult error={error} loading={loading} data={data}>
-                     {data?.getUserById?.username}{console.log(comment)}<IssueDate timeCreated={comment.timeCreated}/>
+                     {data?.getUserById?.username}
                 </QueryResult>  
             :</b></div>
-            <p>{comment.message}</p>            
+            <div>{comment.message}</div>   
+            <div className='commentDate'><IssueDate timeCreated={comment.timeCreated}/></div>         
         </div>
     )
 }
