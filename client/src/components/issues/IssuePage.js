@@ -14,6 +14,7 @@ import CommentCard from '../comments/CommentCard';
 import UserContext from '../../context/userContext';
 import IssueVotes from './IssueVotes';
 import IssueContext from '../../context/issueContext';
+import IssueDate from './IssueDate';
 
 // Import graphql queries and mutations
 import { GET_ISSUE_COMMENTS } from '../graphql/queries/GetIssueComments';
@@ -242,6 +243,7 @@ const IssuePage = ({ match, location }) => {
                         <p>{issueData.data.description}</p>
                         <div className='issueAuthor'>
                             Posted by {issueAuthor} 
+                            <IssueDate timeCreated={issue.timeCreated}/>
                             <div className='issueAuthorEdit'>
                                 <span onClick={handleIssueEdit}>Edit</span>
                             </div>                            

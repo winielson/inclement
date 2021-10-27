@@ -258,19 +258,16 @@ h1 {
   font-size: 100%;
 }
 
-.issuePage .issueAuthor {
+.issueContent .issueAuthor {
   color: #333;
   font-size: 90%;
   text-align: start;
+  font-style: italic;
+  margin-top: 20px;
 }
 
 .issuePage .issueAuthor .issueAuthorEdit{
   text-align: right;
-}
-
-.issuePage .issueAuthor {
-  margin-top: 5px;
-  font-style: italic;
 }
 
 .issuePage .issueAuthor .issueAuthorEdit span{
