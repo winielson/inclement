@@ -173,12 +173,12 @@ const CommentCard = ({ comment }) => {
                 <div className='commentPageForm'>
                     <form onSubmit={handleEditSubmit}>
                         <textarea name="message" cols="60" rows="5" value={commentData.data.message} onChange={handleEditCommentChange}></textarea>  
-                        <div className='issueFormBtns'>
-                            <div className='issueFormUpdateBtns'>
+                        <div className='commentFormBtns'>
+                            <div className='commentFormUpdateBtns'>
                                 <button type='submit'>Update</button>
                                 <button type='button' onClick={handleEditCancel}>Cancel</button>
                             </div>
-                            <div className='issueFormDeleteBtn'>
+                            <div className='commentFormDeleteBtn'>
                                 <button type='button' onClick={handleEditDeleteConfirm}>Delete</button>
                             </div>                                
                         </div>  

@@ -437,7 +437,7 @@ input[type=submit] {
   font-weight: bold;
 }
 
-.issuePageForm .issueFormBtns {
+.issueFormBtns, .commentFormBtns {
   display: flex;
   flex-direction: row;
   flex-basis: 100%;
@@ -445,11 +445,10 @@ input[type=submit] {
   /* background-color: #f1356d; */
 }
 
-.issuePageForm .issueFormBtns .issueFormUpdateBtns button{
+.issueFormUpdateBtns button, .commentFormUpdateBtns button{
   margin-right: 5px;
 }
-
-.issuePageForm .issueFormBtns .issueFormDeleteBtn {
+.issueFormDeleteBtn, .commentFormDeleteBtn {
   /* background-color: aquamarine; */
   margin-left: auto;
 }
