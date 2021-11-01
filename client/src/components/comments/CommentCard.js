@@ -3,21 +3,34 @@
 // Handles all comment functionality and is displayed within its parent IssuePage
 
 import React, { useContext, useEffect, useState } from 'react'
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 
 import UserContext from '../../context/userContext';
 import QueryResult from '../misc/QueryResult';
 import { GET_COMMENT_AUTHOR_NAME } from '../graphql/queries/GetCommentAuthorName';
 import IssueDate from '../issues/IssueDate';
+import { UPDATE_COMMENT_MUTATION } from '../graphql/mutations/UpdateCommentMutation';
+import { confirmAlert } from 'react-confirm-alert';
 
 const CommentCard = ({ comment }) => {
     const { userData } = useContext(UserContext);
     const [isEditable, setIsEditable] = useState(false);
-    const [isLoaded, setIsLoaded] = useState(false)
+    const [inEditMode, setInEditMode] = useState(false); // Used to indicate if user clicked edit
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [isUpdated, setIsUpdated] = useState(false);
+    const [commentData, setCommentData] = useState({
+        data: {
+            message: '',
+            _id: ''
+        }
+    });
     
     const { loading, error, data } = useQuery(GET_COMMENT_AUTHOR_NAME, {
         variables: { getUserByIdId: comment.author },
     });       
+
+    // Initialize useMutation for updating an comment
+    const [updateComment, updateCommentArgs] = useMutation(UPDATE_COMMENT_MUTATION);
 
     useEffect(() => {
         const checkIfContextLoaded = async () => {
@@ -31,15 +44,157 @@ const CommentCard = ({ comment }) => {
 
         checkIfContextLoaded();
 
-        if(isLoaded) {
+        if(isLoaded && !isUpdated) {
+            setCommentData({data: {
+                message: comment.message,
+                _id: comment._id
+            }})
+
             if (userData.user.id === comment.author) {
                 setIsEditable(true);
             }            
         };    
-    }, [userData, comment, isLoaded]);
+    }, [userData, comment, isLoaded, inEditMode, isUpdated]);
+
+    // Update when comment data changes
+    // useEffect(() => {
+    //     // if(isUpdated) {
+    //     //     setIsUpdated(false);
+    //     // }
+
+    //     console.log({commentData: commentData.data.message})
+    //     //setIsLoaded(false);
+    // }, [isUpdated, commentData]);
 
     const handleEditComment = () => {
-        console.log('handleEditComment');
+        setInEditMode(true);
+        console.log({inEditMode});
+    }
+
+    const handleEditCommentChange = (e) => {
+        e.preventDefault();
+
+        const name = e.target.name;
+        const value = e.target.value;
+        let commentInfo = commentData;
+
+        // Handle text inputs
+        if (commentInfo.data.hasOwnProperty(name)) {
+            commentInfo.data[name] = value;
+            setCommentData({ data: commentInfo.data });
+       }
+    }
+
+    const handleEditSubmit = () => {
+        // make mutation call to api
+        if(updateCommentArgs.error) { // catch GraphQL api errors
+            console.log(updateCommentArgs.error);
+        }
+
+        console.log({data: commentData.data})
+
+        const updateCommentMutation = updateComment({ variables: { 
+            editCommentInput: {
+                "_id": commentData.data._id,
+                "message": commentData.data.message
+            }
+        }});
+
+        console.log(updateCommentMutation);
+
+        // switch edit mode off and refresh data
+        setInEditMode(false);
+
+        // prevents useEffect from resetting commentData
+        setIsUpdated(true);
+    }
+
+    
+    const handleEditCancel = () => {
+        // switch edit mode off
+        setInEditMode(false);
+    }
+
+    
+    const handleEditDeleteConfirm = () => {
+        confirmAlert({
+            customUI: ({ onClose }) => {
+              return (
+                <div className='custom-alert-ui'>
+                  <h1>Confirm to submit</h1>
+                  <p>Are you sure to delete this Issue?</p><br/>
+                  <button onClick={onClose}>No</button>
+                  <button
+                    onClick={() => {
+                      handleEditDelete();
+                      onClose();
+                    }}
+                  >
+                    Yes, Delete it!
+                  </button>
+                </div>
+              );
+            }
+          });
+    }
+
+    const handleEditDelete = () => {
+        console.log('in handleEditDelete')
+
+        // // make mutation call to api
+        // if(deleteIssueArgs.error) { // catch GraphQL api errors
+        //     console.log(updateIssueArgs.error);
+        // }
+
+        // // Call mutation
+        // const deleteIssueMutation = deleteIssue({ variables: { 
+        //     deleteIssueInput: {
+        //         "currentUser": userData.user.id,
+        //         "_id": issue._id
+        //     } 
+        // }});
+
+        // console.log(deleteIssueMutation);     
+
+        // // Make clear that Issue is deleted
+        // setIssueData({data: {title: "[deleted]", description: "[deleted]"}});
+
+        // // switch editing flags off
+        // setShowEdit(false);
+        // setInEditMode(false);
+        
+        // // let issueContainer know it needs to update via issueContext
+        // setShouldUpdate(true);
+    }
+
+    
+    if(inEditMode) {
+        return (
+            <div className='comment'>
+                <div><b>
+                    <QueryResult error={error} loading={loading} data={data}>
+                        {data?.getUserById?.username}
+                    </QueryResult>  
+                :</b></div>
+                {/* <div className='commentDescription'> */}
+                <div className='commentPageForm'>
+                    <form onSubmit={handleEditSubmit}>
+                        <textarea name="message" cols="60" rows="5" value={commentData.data.message} onChange={handleEditCommentChange}></textarea>  
+                        <div className='issueFormBtns'>
+                            <div className='issueFormUpdateBtns'>
+                                <button type='submit'>Update</button>
+                                <button type='button' onClick={handleEditCancel}>Cancel</button>
+                            </div>
+                            <div className='issueFormDeleteBtn'>
+                                <button type='button' onClick={handleEditDeleteConfirm}>Delete</button>
+                            </div>                                
+                        </div>  
+                    </form>     
+                </div>                    
+                {/* </div> */}
+                <div className='commentDate'><IssueDate timeCreated={comment.timeCreated}/></div>      
+            </div>
+        )
     }
 
     // Show edit button if current user created the post
@@ -52,7 +207,7 @@ const CommentCard = ({ comment }) => {
                     </QueryResult>  
                 :</b></div>
                 <div className='commentDescription'>
-                    {comment.message}
+                    {commentData.data.message}
                     <div className='commentDescriptionEdit'>
                         <span onClick={handleEditComment}>Edit</span>
                     </div>                    
@@ -69,7 +224,7 @@ const CommentCard = ({ comment }) => {
                      {data?.getUserById?.username}
                 </QueryResult>  
             :</b></div>
-            <div>{comment.message}</div>   
+            <div>{commentData.data.message}</div>   
             <div className='commentDate'><IssueDate timeCreated={comment.timeCreated}/></div>         
         </div>
     )

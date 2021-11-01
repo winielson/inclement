@@ -21,13 +21,35 @@ export default function LandingPage() {
 
     return (
         <div className='landingPage'>
+            <div class="background">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <h1>What is Inclement?</h1>
             <p>
-                <span>A place where you can explore the latest news about Climate Issues and discuss with others.</span><br/>
+                <span>This is a place where you can explore the latest news about climate issues and discuss with others.</span><br/>
                 <br/>
-                <span>Interact with our active community by reading, creating, and commenting on posts.</span>
+                <span>Interact with our active community by reading, creating, voting, and commenting on posts.</span>
             </p>
-            <Link to='/register'>Join the Community</Link>            
+            <Link to='/register'>Join the Community</Link>    
         </div>
     )
 }

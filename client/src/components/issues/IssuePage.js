@@ -151,20 +151,42 @@ const IssuePage = ({ match, location }) => {
         alert('Issue was updated successfully!');
     }
 
+    // const handleEditDeleteConfirm = () => {
+    //     confirmAlert({
+    //         title: 'Confirm to submit',
+    //         message: 'Are you sure to delete this Issue?',
+    //         buttons: [
+    //             {
+    //                 label: 'Yes',
+    //                 onClick: handleEditDelete
+    //             },
+    //             {
+    //                 label: 'No',
+    //             }
+    //         ]
+    //     });
+    // }
+
     const handleEditDeleteConfirm = () => {
         confirmAlert({
-            title: 'Confirm to submit',
-            message: 'Are you sure to delete this Issue?',
-            buttons: [
-                {
-                    label: 'Yes',
-                    onClick: handleEditDelete
-                },
-                {
-                    label: 'No',
-                }
-            ]
-        });
+            customUI: ({ onClose }) => {
+              return (
+                <div className='custom-alert-ui'>
+                  <h1>Confirm to submit</h1>
+                  <p>Are you sure to delete this Issue?</p><br/>
+                  <button onClick={onClose}>No</button>
+                  <button
+                    onClick={() => {
+                      handleEditDelete();
+                      onClose();
+                    }}
+                  >
+                    Yes, Delete it!
+                  </button>
+                </div>
+              );
+            }
+          });
     }
 
     const handleEditDelete = () => {

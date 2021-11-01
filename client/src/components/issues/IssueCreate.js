@@ -54,11 +54,10 @@ export default function IssueCreate() {
         }
 
         // alert the user that the new Issue has been created
-        alert('New Issue has successfully been created!')
+        // alert('New Issue has successfully been created!')
 
         // set update issue flag to true
         setShouldUpdate(true);
-        console.log({msg: 'issuecreate', shouldUpdate});
 
         // route them back to dashboard
         history.push('/');
@@ -75,13 +74,17 @@ export default function IssueCreate() {
             <div className='issueCreateForm'>
                 <form onSubmit={handleIssueCreationSubmit}>
                     <div className='issueCreateInputs'>
-                        <label htmlFor="title"><b>Title: </b></label>
-                        <input type="text" name='title' value={issueData.data.title} onChange={handleInputChange}/><br/>
-                        <label htmlFor="description"><b>Description: </b></label>
-                        <input type="text" name='description' value={issueData.data.description} onChange={handleInputChange}/><br/>
-                    </div>            
-                    <button type='submit'>Create</button>
-                    <button type='button' onClick={handleCancelClick}>Cancel</button>
+                        <label htmlFor="title" >Title: </label>
+                        <input type="text" name='title' value={issueData.data.title} onChange={handleInputChange}/><br/><br/>
+                        <label htmlFor="description">Description: </label><br/>
+                        {/* <input type="text" name='description' value={issueData.data.description} onChange={handleInputChange}/><br/> */}
+                        <textarea name='description' value={issueData.data.description} onChange={handleInputChange}/><br/>
+                    </div>    
+                    <div className='issueCreateButtons'>
+                        <button type='submit'>Create</button>
+                        <button type='button' onClick={handleCancelClick}>Cancel</button>
+                    </div>        
+                    
                 </form>
             </div>            
         </div>

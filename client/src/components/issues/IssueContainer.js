@@ -15,6 +15,7 @@ export default function IssueContainer() {
     const { loading, error, data, refetch } = useQuery(GET_ALL_ISSUES); // Query to get all the issues using GraphQL
     const { shouldUpdate, setShouldUpdate } = useContext(IssueContext);
     const [ sortedData, setSortedData ] = useState([]);
+    const [isRefetched, setIsRefetched] = useState(false);
 
     const history = useHistory(); 
 
@@ -26,12 +27,18 @@ export default function IssueContainer() {
     }, [data]);
 
     useEffect(() => {
-        if(shouldUpdate) {
-            setShouldUpdate(false);
-            refetch();
+        const refetchIssues = async () => {
+            await refetch();
+            setIsRefetched(true);
         }
-        console.log({msg: 'issuecontainer', shouldUpdate});
-    }, [shouldUpdate, setShouldUpdate, refetch]);
+
+        refetchIssues();
+
+        if(shouldUpdate && isRefetched) {            
+            setShouldUpdate(false);
+            setIsRefetched(false);
+        }
+    }, [shouldUpdate, setShouldUpdate, isRefetched, refetch]);
 
     const handleIssueCreation = () => {
         history.push('/createIssue');

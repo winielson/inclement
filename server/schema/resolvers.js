@@ -423,14 +423,7 @@ const resolvers = {
         },
         editComment: async (parent, args) => {
             try {
-                const { message, currentUser, _id } = args.input;
-
-                // Validate: Check if current user is author 
-                const comment = await Comment.findOne({_id: _id});
-                if(comment.author.toString() !== currentUser) { // (If false: cannot delete comment)
-                    console.log("editComment failure");
-                    return { errorMessage: 'editComment ERROR: current user is not the author of this comment' };
-                }
+                const { message, _id } = args.input;
 
                 // Update comment data with matching _id
                 const updatedComment = await Comment.updateOne({ _id: _id }, { $set: 

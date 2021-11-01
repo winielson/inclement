@@ -142,7 +142,6 @@ const typeDefs = gql`
 
     input EditCommentInput {
         message: String # sets default value to '' if not explicitly declared
-        currentUser: String!
         _id: String!
     }
 
