@@ -11,6 +11,7 @@ import { GET_COMMENT_AUTHOR_NAME } from '../graphql/queries/GetCommentAuthorName
 import IssueDate from '../issues/IssueDate';
 import { UPDATE_COMMENT_MUTATION } from '../graphql/mutations/UpdateCommentMutation';
 import { confirmAlert } from 'react-confirm-alert';
+import { DELETE_COMMENT_MUTATION } from '../graphql/mutations/DeleteCommentMutation';
 
 const CommentCard = ({ comment }) => {
     const { userData } = useContext(UserContext);
@@ -29,8 +30,11 @@ const CommentCard = ({ comment }) => {
         variables: { getUserByIdId: comment.author },
     });       
 
-    // Initialize useMutation for updating an comment
+    // Initialize useMutation for updating a comment
     const [updateComment, updateCommentArgs] = useMutation(UPDATE_COMMENT_MUTATION);
+
+    // useMutation for deleting a comment
+    const [deleteComment, deleteCommentArgs] = useMutation(DELETE_COMMENT_MUTATION);
 
     useEffect(() => {
         const checkIfContextLoaded = async () => {
@@ -56,15 +60,6 @@ const CommentCard = ({ comment }) => {
         };    
     }, [userData, comment, isLoaded, inEditMode, isUpdated]);
 
-    // Update when comment data changes
-    // useEffect(() => {
-    //     // if(isUpdated) {
-    //     //     setIsUpdated(false);
-    //     // }
-
-    //     console.log({commentData: commentData.data.message})
-    //     //setIsLoaded(false);
-    // }, [isUpdated, commentData]);
 
     const handleEditComment = () => {
         setInEditMode(true);
@@ -141,30 +136,28 @@ const CommentCard = ({ comment }) => {
     const handleEditDelete = () => {
         console.log('in handleEditDelete')
 
-        // // make mutation call to api
-        // if(deleteIssueArgs.error) { // catch GraphQL api errors
-        //     console.log(updateIssueArgs.error);
-        // }
+        // make mutation call to api
+        if(deleteCommentArgs.error) { // catch GraphQL api errors
+            console.log(deleteCommentArgs.error);
+        }
 
-        // // Call mutation
-        // const deleteIssueMutation = deleteIssue({ variables: { 
-        //     deleteIssueInput: {
-        //         "currentUser": userData.user.id,
-        //         "_id": issue._id
-        //     } 
-        // }});
+        // Call mutation
+        const deleteCommentMutation = deleteComment({ variables: { 
+            deleteCommentInput: {
+                "currentUser": userData.user.id,
+                "_id": comment._id
+            } 
+        }});
 
-        // console.log(deleteIssueMutation);     
+        console.log(deleteCommentMutation);     
 
-        // // Make clear that Issue is deleted
-        // setIssueData({data: {title: "[deleted]", description: "[deleted]"}});
+        // Make clear that Issue is deleted
+        setCommentData({data: {message: "[deleted]"}});
 
-        // // switch editing flags off
-        // setShowEdit(false);
-        // setInEditMode(false);
-        
-        // // let issueContainer know it needs to update via issueContext
-        // setShouldUpdate(true);
+        // switch editing flags off
+        setInEditMode(false);
+
+        setIsUpdated(true);
     }
 
     
